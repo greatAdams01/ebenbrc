@@ -27,7 +27,7 @@ const Earn = () => {
             className="font-jost py-8 "
           >
             <Tabs.Item title="NFT Staking">
-              <div className="p-2 md:p-8 text-slate-50 text-left max-w-screen-xl mx-auto font-jost m-24 lg:w-11/12 rounded-2xl border border-orange-500 bg-gradient-to-b from-orange-950 to-neutral-950">
+              <div className="p-2 md:p-8 text-slate-50 text-left max-w-screen-xl mx-auto font-jost m-24 lg:w-11/12 rounded-2xl border border-orange-500 bg-gradient-to-b from-blue-900 to-neutral-950">
                 <div className="py-8 border-b border-orange-500 text-slate-50 text-3xl">
                   <p>$SHIBAI NFT Stake</p>
                 </div>
@@ -81,7 +81,7 @@ const Earn = () => {
             </Tabs.Item>
 
             <Tabs.Item title="Tokens Staking" className="text-orange-500">
-              <div className="p-2 md:p-8 text-slate-50 text-left max-w-screen-xl mx-auto font-jost m-24 lg:w-11/12 rounded-2xl border border-orange-500 bg-gradient-to-b from-orange-950 to-neutral-950">
+              <div className="p-2 md:p-8 text-slate-50 text-left max-w-screen-xl mx-auto font-jost m-24 lg:w-11/12 rounded-2xl border border-orange-500 bg-gradient-to-b from-blue-900 to-neutral-950">
                 <div className="py-8 border-b border-orange-500 text-slate-50 text-3xl">
                   <p>$SHIBAI Stake</p>
                 </div>
@@ -247,7 +247,7 @@ const Earn = () => {
             </Tabs.Item>
 
             <Tabs.Item title="LP Staking" className="text-orange-500">
-              <div className="p-2 md:p-8 text-slate-50 text-left max-w-screen-xl mx-auto font-jost m-24 lg:w-11/12 rounded-2xl border border-orange-500 bg-gradient-to-b from-orange-950 to-neutral-950">
+              <div className="p-2 md:p-8 text-slate-50 text-left max-w-screen-xl mx-auto font-jost m-24 lg:w-11/12 rounded-2xl border border-orange-500 bg-gradient-to-b from-blue-900 to-neutral-950">
                 <div className="py-8 border-b border-orange-500 text-slate-50 text-3xl">
                   <p>$SHIBAI LP Stake</p>
                 </div>

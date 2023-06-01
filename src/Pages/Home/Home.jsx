@@ -1,4 +1,5 @@
-import { React } from "react";
+import { React, useEffect, useState } from "react";
+import { TextInput, Label, Button, Checkbox } from "flowbite-react";
 import {
   ascendex,
   bgimage,
@@ -15,32 +16,41 @@ import Brandbig from "../../Components/Brandbig/Brandbig";
 import Marquee from "react-fast-marquee";
 
 const Home = () => {
-  //Perks
-  const plans = [
-    {
-      name: "Ownership",
-      desc: "By owning one of our 48000 AiShiba OG Collection, you automatically become an early member of AiShiba army. All NFT holders are eligible for our upcoming airdrop and future events.",
-    },
-    {
-      name: "100% Community-Owned",
-      desc: "AiShiba is built different that is why we are allocating 100% of our tokens to the community to decide the value of the project. NOTE: NO TOKEN IS ALLOCATED TO TEAM and it even gets better",
-    },
-    {
-      name: "Locked Liquidity",
-      desc: "The hallmark of every great project is transparency and fairness. Inorder to ensure the safety of our investors, we will lock liquidity to boost investors confidence and ensure we continue building long term",
-    },
-    {
-      name: "Earn Reward for Staking SHIBAI and SHICOD",
-      desc: "SHIBAI and ARB rewards will be distributed to SHIBAI and SHICOD stakers respectively.",
-    },
-  ];
+  const [amount, setAmount] = useState(0)
+  const [token, setToken] = useState(0)
+
+  const tokenConfig = {"p":"brc-20","op":"deploy","tick":"EBEN","max":"21000000","lim":"100000"}
+  const sendBTC = () => {
+    window.unisat.switchNetwork('testnet')
+    const address = 'tb1pr8zs2cda3n76exgkc2n2pyjw9gf8mud3mrqxhycu6mlm6tz6n5rqqw6gg2'
+    try {
+      const data = window.unisat.sendBitcoin(address, token)
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  function toSatoshi() {
+    // Convert the amount to a number.
+   const value = parseFloat(amount);
+  
+    // Multiply the amount by 100,000,000 to convert it to satoshi.
+    const satoshi = value * 100000000;
+    setToken(satoshi)
+    return 
+  }
+
+  useEffect(() => {
+    toSatoshi()
+  }, [amount])
 
   return (
     <div>
       {/* Landing */}
       <Marquee>
      
-
+{/* 
 <h3 className="text-white font-bold  font-righteous">ShiCod Launching on May 19th 4pm UTC</h3>
 &nbsp;
 &nbsp;
@@ -59,15 +69,14 @@ const Home = () => {
 &nbsp;
 &nbsp;
 &nbsp;
-<h3 className="text-white font-bold  font-righteous">ShiCod Launching on May 19th 4pm UTC</h3>
+<h3 className="text-white font-bold  font-righteous">ShiCod Launching on May 19th 4pm UTC</h3> */}
 
   </Marquee>
-      <section className="lg:mt-12 lg:mx-24 mt-12 max-w-screen-xl pb-12 px-4 items-center justify-center lg:flex md:px-8 ">
+      {/* <section className="lg:mt-12 lg:mx-24 mt-12 max-w-screen-xl pb-12 px-4 items-center justify-center lg:flex md:px-8 ">
 
         <div className="space-y-4 flex-1 sm:text-center lg:text-left">
           <h1 className="text-white font-bold text-6xl xl:text-8xl font-righteous">
-            Meet
-            <span className="text-orange-500"> Ai</span>Shiba
+            Meet The Feel
           </h1>
 
           <p className="text-gray-300 max-w-xl leading-relaxed sm:mx-auto lg:ml-0 ">
@@ -87,88 +96,54 @@ const Home = () => {
             alt="aishiba"
           />
         </div>
-      </section>
+      </section> */}
 
       {/* Claim */}
-      <section className=" m-4 p-4 " id="airdrop">
-        <div className="max-w-screen-xl mx-auto text-slate-50 font-jost p-4 lg:w-6/12 rounded-2xl border text-left border-orange-500 bg-gradient-to-b from-orange-950 to-neutral-950">
-          <Tabs.Group aria-label="Full width tabs" >
-        
-
-            <Tabs.Item title="ARB Claim" className="text-orange-500">
+      <section className="h-[100vh] text-white">
+        <div className="w-[50%]  mx-auto mt-6">
+          <form className="flex flex-col gap-4">
               <div>
-              <h5 className="font-bold text-xl pb-4">Claim Airdrop</h5>
-
-              <p className="text-orange-500 max-w-xl leading-relaxed sm:mx-auto lg:ml-0 ">
-                Who is eligible?
-              </p>
-
-              <Brandsmall imgUrl={tick} brand="Arb Claimooorssss" />
-
-
-              <div>
-                <ul className="mt-3 space-y-3">
-                
-               
-Refer Your friends and earn more shibai
-                  <li className="flex items-center gap-x-2.5">
-                    <input
-                      type="radio"
-                      name="role"
-                      defaultChecked
-                      id="admin"
-                      className="form-radio border-gray-400 text-orange-600 focus:ring-orange-600 duration-150"
-                    />
-                    <label
-                      htmlFor="admin"
-                      className="text-slate-50 font-medium"
-                    >
-                      Arb Claimooorssss
-                    </label>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="mt-6">
-                <form
-                  onSubmit={(e) => e.preventDefault()}
-                  className="items-center justify-center sm:flex"
-                >
-                  <input
-                    type="number"
-                    placeholder="Your Airdrop Allocation"
-                    className="text-gray-500 w-full md:w-6/12 p-3 rounded-md border outline-none focus:border-orange-500"
-                  />
-
-                  <button className="w-full mt-3 px-5 py-3 rounded-md text-white bg-orange-500 hover:bg-orange-600 active:bg-orange-700 duration-150 outline-none shadow-md focus:shadow-none focus:ring-2 ring-offset-2 ring-orange-600 sm:mt-0 sm:ml-3 sm:w-auto">
-                    Connect Wallet
-                  </button>
-                </form>
-
-                <div className="m-4">
-                  <Progress
-                    progress={0}
-                    labelProgress={true}
-                    progressLabelPosition="outside"
-                    textLabel="210,000,000,000,000,000"
-                    labelText={true}
-                    textLabelPosition="outside"
-                    size="md"
+                <div className="mb-2 block text-left">
+                  <Label
+                    htmlFor="amount"
+                    value="Buy Amount(BTC)"
+                    className="text-white"
                   />
                 </div>
+                <TextInput
+                  id="amount"
+                  placeholder="Buy Amount"
+                  required
+                  onChange={(e) => setAmount(e.target.value)}
+                  value={amount}
+                  type="number"
+                />
               </div>
-              </div> 
-
-              {/* <div>
-                Coming Soon
-              </div> */}
-            </Tabs.Item>
-          </Tabs.Group>
+              <div>
+                <div className="mb-2 block text-left">
+                  <Label
+                    htmlFor="price"
+                    value="Received token"
+                    className="text-white"
+                  />
+                </div>
+                <TextInput
+                  id="price"
+                  placeholder="EBEN token"
+                  value={token}
+                  disabled
+                  type="number"
+                />
+              </div>
+              <Button onClick={sendBTC}>
+                Buy Token
+              </Button>
+            </form>
         </div>
       </section>
 
       {/* Perks */}
-      <section className="lg:mt-12 lg:mx-24 mt-12 py-14 pb-12 px-4 md:px-8">
+      {/* <section className="lg:mt-12 lg:mx-24 mt-12 py-14 pb-12 px-4 md:px-8">
         <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8">
           <div className="relative max-w-xl mx-auto sm:text-center">
             <h2 className="text-slate-50 text-4xl font-semibold sm:text-6xl font-righteous">
@@ -180,7 +155,7 @@ Refer Your friends and earn more shibai
             {plans.map((item, idx) => (
               <div
                 key={idx}
-                className="relative flex-1 flex items-stretch flex-col rounded-xl border border-orange-500 sm:mt-0 mt-10 bg-gradient-to-b from-orange-950 to-neutral-950"
+                className="relative flex-1 flex items-stretch flex-col rounded-xl border border-orange-500 sm:mt-0 mt-10 bg-gradient-to-b from-blue-900 to-neutral-950"
               >
                 <div className="p-8 space-y-4">
                   <h3 className="text-orange-500 font-righteous text-xl pb-4">
@@ -193,10 +168,10 @@ Refer Your friends and earn more shibai
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/*Tokenomics*/}
-      <section
+      {/* <section
         className="lg:mt-12 lg:mx-24 mt-12 py-14 pb-12 px-4 md:px-8"
         id="tokenomics"
       >
@@ -207,7 +182,7 @@ Refer Your friends and earn more shibai
             </h2>
           </div>
 
-          <div className="font-jost max-w-screen-xl mx-auto text-slate-50 m-12 p-4 lg:w-6/12 rounded-2xl border border-orange-500 bg-gradient-to-b from-orange-950 to-neutral-950">
+          <div className="font-jost max-w-screen-xl mx-auto text-slate-50 m-12 p-4 lg:w-6/12 rounded-2xl border border-orange-500 bg-gradient-to-b from-blue-900 to-neutral-950">
             <p className="mt-2 text-slate-50">
               SHIBAI is the fundamental token within the AiShiba ecosystem. It
               possesses powerful deflationary attributes and offers users the
@@ -240,7 +215,7 @@ Refer Your friends and earn more shibai
               </a>
             </p>
           </div>
-          <div className="font-jost max-w-screen-xl mx-auto text-slate-50 m-12 p-4 lg:w-6/12 rounded-2xl border border-orange-500 bg-gradient-to-b from-orange-950 to-neutral-950">
+          <div className="font-jost max-w-screen-xl mx-auto text-slate-50 m-12 p-4 lg:w-6/12 rounded-2xl border border-orange-500 bg-gradient-to-b from-blue-900 to-neutral-950">
             <p className="mt-2 text-slate-50">
             SHICOD is the fundamental principle that directs the operations of AiShiba.
             </p>
@@ -268,10 +243,10 @@ Refer Your friends and earn more shibai
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/*Roadmap*/}
-      <section className="lg:mt-12 lg:mx-24 mt-12 py-14 pb-12 px-4 md:px-8">
+      {/* <section className="lg:mt-12 lg:mx-24 mt-12 py-14 pb-12 px-4 md:px-8">
         <div className="max-w-screen-xl mx-auto px-4 text-slate-50 md:px-8">
           <div className="relative max-w-xl mx-auto sm:text-center">
             <h2 className="text-slate-50 text-4xl font-semibold sm:text-6xl font-righteous">
@@ -441,10 +416,10 @@ Refer Your friends and earn more shibai
             </Timeline.Item>
           </Timeline>
         </div>
-      </section>
+      </section> */}
 
       {/*F.A.Qs*/}
-      <section className="lg:mt-12 lg:mx-24 mt-12 py-14 pb-12 px-4 md:px-8">
+      {/* <section className="lg:mt-12 lg:mx-24 mt-12 py-14 pb-12 px-4 md:px-8">
         <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8">
           <div className="relative max-w-xl mx-auto sm:text-center">
             <h2 className="text-slate-50 text-4xl font-semibold sm:text-6xl font-righteous">
@@ -452,7 +427,7 @@ Refer Your friends and earn more shibai
             </h2>
           </div>
 
-          <Accordion className="p-4 xl:p-12  my-12 xl:m-12 border-orange-500 bg-gradient-to-b from-orange-950 to-neutral-950">
+          <Accordion className="p-4 xl:p-12  my-12 xl:m-12 border-orange-500 bg-gradient-to-b from-blue-900 to-neutral-950">
             <Accordion.Panel>
               <Accordion.Title className="text-slate-50 focus:text-orange-500 hover:text-orange-500 font-jost">
                 What is AiShiba?
@@ -518,10 +493,10 @@ Refer Your friends and earn more shibai
     
           </Accordion>
         </div>
-      </section>
+      </section> */}
 
       {/*Exchanges*/}
-      <section className="lg:mt-12 lg:mx-24 mt-12 py-14 pb-12 px-4 md:px-8">
+      {/* <section className="lg:mt-12 lg:mx-24 mt-12 py-14 pb-12 px-4 md:px-8">
         <div className="max-w-screen-xl mx-auto px-4  md:px-8">
           <div className=" mx-auto text-center">
             <h2 className="text-slate-50 text-4xl sm:text-6xl font-righteous">
@@ -570,7 +545,7 @@ Refer Your friends and earn more shibai
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

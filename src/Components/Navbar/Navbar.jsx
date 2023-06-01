@@ -1,9 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Logo } from '../../Assets'
+import { shortenAddress } from '../../shortAddress'
 
 
 
 const Navbar = () => {
+    const [account, setAcount] = useState('')
+
+    useEffect(() => {
+    // if (typeof window.unisat !== 'undefined') {
+    //     console.log('UniSat Wallet is installed!');
+    //     alert('UniSat Wallet is installed!')
+    //     }
+    }, [])
 
   const [state, setState] = useState(false)
 
@@ -15,6 +24,20 @@ const Navbar = () => {
     { title: "ShiCod", path: "../shicod" },
 ]
 
+const connect = async () => {
+
+    try {
+        if(account.length) {
+            setAcount('')
+            return
+        }
+        let accounts = await window.unisat.requestAccounts();
+        setAcount(accounts[0])
+      } catch (e) {
+        console.log('connect failed');
+      }
+}
+
 
   return (
     <div>
@@ -22,13 +45,8 @@ const Navbar = () => {
 <nav className="bg-opacity-0 border-b w-full md:static md:border-none font-jost py-4 ">
             <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
                 <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                    <a href="../">
-                        <img
-                            src={Logo}
-                            width={180}
-                            height={50}
-                            alt="AiShiba"
-                        />
+                    <a className='text-[20px] font-bold text-white' href="../">
+                       Edenbrc.io
                     </a>
                     <div className="md:hidden">
                         <button className="text-slate-50 hover:text-slate-50"
@@ -61,12 +79,12 @@ const Navbar = () => {
                                 )
                             })
                         } */}
-                            <li  className="text-slate-50 hover:text-orange-500">
+                            <li  className="text-slate-50 hover:text-blue-500">
                                         <a href="../" className="block">
                                            Home
                                         </a>
                                     </li>
-                            <li  className="text-slate-50 hover:text-orange-500">
+                            {/* <li  className="text-slate-50 hover:text-orange-500">
                                         <a href="../#airdrop" className="block">
                                            Airdrop
                                         </a>
@@ -85,13 +103,13 @@ const Navbar = () => {
                                         <a href="../shicod" className="block">
                                            Shicod
                                         </a>
-                                    </li>
+                                    </li> */}
                         <span className='hidden w-px h-6 bg-gray-300 md:block'></span>
                         <div className='space-y-3 items-center gap-x-6 md:flex md:space-y-0'>
 
                             <li>
-                                <a href="#0" className="block py-3 px-4 font-medium text-center text-white bg-orange-600 hover:bg-orange-500 active:bg-orange-700 active:shadow-none rounded-full shadow md:inline">
-                                    Connect Wallet
+                                <a href="#0" onClick={connect} className="block py-3 px-4 font-medium text-center text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 active:shadow-none rounded-full shadow md:inline">
+                                    {account ? shortenAddress(account) : 'Connect Wallet'}
                                 </a>
                             </li>
                         </div>

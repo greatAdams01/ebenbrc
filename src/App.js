@@ -8,16 +8,16 @@ import { Navbar, Footer } from './Components';
 
 const App = () => {
   return (
-    <div className="App bg-gradient-to-b from-orange-950 to-neutral-950">
+    <div className="App bg-gradient-to-b from-blue-900 to-neutral-950">
     <BrowserRouter>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home/>} />
-        <Route path="/earn" element={<Earn />} />
-        <Route path="/shicod" element={<ShiCod />} />
+        {/* <Route path="/earn" element={<Earn />} />
+        <Route path="/shicod" element={<ShiCod />} /> */}
         <Route path="/*" element={<NoPage/>} />
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
     </BrowserRouter>
 
     <BackTop />
