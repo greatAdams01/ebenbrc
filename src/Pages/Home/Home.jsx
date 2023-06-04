@@ -160,9 +160,9 @@ const Home = () => {
               {
                 account && (
                   <>
-                    <li>
-                  <p className="block py-3 px-4 font-medium text-center text-white bg-green-600 hover:bg-green-500 active:bg-green-700 active:shadow-none rounded-full shadow md:inline">
-                      Eden: {myEden}
+                    <li className=" py-3 px-4 font-medium text-white bg-green-600 hover:bg-green-500 active:bg-green-700 active:shadow-none rounded-full shadow md:inline">
+                  <p className="">
+                      Eden:{myEden}
                   </p>
               </li>
                   </>
@@ -179,7 +179,7 @@ const Home = () => {
         </div>
       </nav>
 
-      <section className="lg:w-[60%] m-auto py-20 px-5">
+      <section className="lg:w-[60%] m-auto py-20 px-5 font-semibold">
         <div className="lg:flex lg:space-x-10 text-white">
         <img className="rounded-2xl h-[300px]" src="./eden.jpg" alt="" />
         <div>
@@ -251,13 +251,15 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="px-5">
+      <section className=" w-[900px] mx-auto px-5">
         <p className="w-[150px] text-center py-2 rounded-full mx-auto text-white font-bold text-[20px] ">Public Sale Info</p>
-        <div className="grid g lg:grid-cols-4 gap-2 mx-auto mt-5 mb-10">
-          <div className="token">
+        <div className="grid g lg:grid-cols-2 gap-2 mx-auto mt-5 mb-10">
+
+          <div className="bg-white rounded-2xl py-5">
+            <div className="token">
             <p >Token:</p>
             <p>Eden</p>
-          </div>
+            </div>
 
           <div className="token">
           <p >1 Eden =</p>
@@ -273,12 +275,31 @@ const Home = () => {
             <p >Total fundraising amount:</p>
             <p>22BTC</p>
           </div>
-            
+
 
           <div className="token">
-            <p >Actual fundraising amount:</p>
-            <p>{acutalFunds}</p>
-          </div> 
+            <p >5%  =</p>
+            <p>Ecosystem incentives</p>
+          </div>
+
+          <div className="token">
+            <p >2%  =</p>
+            <p>Team</p>
+          </div>
+
+          <div className="token">
+            <p >3%  =</p>
+            <p>strategic partnership</p>
+          </div>
+
+          </div>            
+
+          <div className="bg-white rounded-2xl py-5">
+            <div className="token flex-wrap">
+              <p >Actual fundraising amount:</p>
+              <p>{acutalFunds}</p>
+            </div> 
+
 
           <div className="token">
             <p >Number of fundraisers:</p>
@@ -305,19 +326,6 @@ const Home = () => {
             <p>IDO allocation first come, first serve</p>
           </div>
 
-          <div className="token">
-            <p >5%  =</p>
-            <p>Ecosystem incentives</p>
-          </div>
-
-          <div className="token">
-            <p >2%  =</p>
-            <p>Team</p>
-          </div>
-
-          <div className="token">
-            <p >3%  =</p>
-            <p>strategic partnership</p>
           </div>
         </div>
       </section>
