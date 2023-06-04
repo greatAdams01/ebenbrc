@@ -168,11 +168,11 @@ const Home = () => {
                   </>
                 )
               }
-              <li>
-                  <button onClick={connect} className="block py-3 px-4 font-medium text-center text-white bg-green-600 hover:bg-green-500 active:bg-green-700 active:shadow-none rounded-full shadow md:inline">
-                      {account ? shortenAddress(account) : 'Connect Wallet'}
-                  </button>
-              </li>
+                <li className="text-center">
+                    <button onClick={connect} className=" py-3 px-4 font-medium text-white bg-green-600 hover:bg-green-500 active:bg-green-700 active:shadow-none rounded-full shadow md:inline">
+                        {account ? shortenAddress(account) : 'Connect Wallet'}
+                    </button>
+                </li>
                 </div>
             </ul>
           </div>
