@@ -1,9 +1,11 @@
 import { React, useEffect, useState } from "react";
+import { message } from 'antd';
 import { TextInput, Label, Button } from "flowbite-react";
 import CountDown from "../../Components/CountDown";
 import { shortenAddress } from "../../shortAddress";
 
 const Home = () => {
+  const [messageApi, contextHolder] = message.useMessage();
   const [amount, setAmount] = useState(0)
   const [token, setToken] = useState(0)
   const [state, setState] = useState(false)
@@ -13,7 +15,7 @@ const Home = () => {
   const connect = async () => {
 
     try {
-        if(account.length) {
+        if(account.length < 10) {
             setAcount('')
             return
         }
@@ -24,12 +26,19 @@ const Home = () => {
       }
 }
 
-  const tokenConfig = {"p":"brc-20","op":"deploy","tick":"EBEN","max":"21000000","lim":"100000"}
   const sendBTC = async () => {
-    await window.unisat.switchNetwork('testnet')
+    const value = parseFloat(amount);
     const address = 'tb1pr8zs2cda3n76exgkc2n2pyjw9gf8mud3mrqxhycu6mlm6tz6n5rqqw6gg2'
     try {
-      const data = await window.unisat.sendBitcoin(address, token)
+      if (!account.length) {
+        messageApi.open({
+          type: 'error',
+          content: "Connect wallet!!",
+        });
+        return
+      }
+      await window.unisat.switchNetwork('testnet')
+      const data = await window.unisat.sendBitcoin(address, value)
       console.log(data)
     } catch (error) {
       console.log(error)
@@ -42,7 +51,9 @@ const Home = () => {
   
     // Multiply the amount by 100,000,000 to convert it to satoshi.
     const satoshi = value * 100000000;
-    setToken(satoshi)
+    const edenValue = 1 / 0.00000045;
+    const eden = value * edenValue;
+    setToken(eden)
     return 
   }
 
@@ -52,7 +63,7 @@ const Home = () => {
 
   return (
     <div>
-
+      {contextHolder}
 <nav className="bg-opacity-0 text-center border-b w-full md:static md:border-none font-jost py-4 ">
             <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
                 <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -79,42 +90,11 @@ const Home = () => {
                 </div>
                 <div className={`flex-1 pb-3 mt-8 md:block md:pb-0 md:mt-0 ${state ? 'block' : 'hidden'}`}>
                     <ul className="justify-end items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
-                        {/* {
-                            navigation.map((item, idx) => {
-                                return (
-                                    <li key={idx} className="text-slate-50 hover:text-orange-500">
-                                        <a href={item.path} className="block">
-                                            {item.title}
-                                        </a>
-                                    </li>
-                                )
-                            })
-                        } */}
                             <li  className="text-slate-50 hover:text-green-500">
                                         <a href="../" className="block">
                                            Home
                                         </a>
                                     </li>
-                            {/* <li  className="text-slate-50 hover:text-orange-500">
-                                        <a href="../#airdrop" className="block">
-                                           Airdrop
-                                        </a>
-                                    </li>
-                            <li  className="text-slate-50 hover:text-orange-500">
-                                        <a href="../#tokenomics" className="block">
-                                           Tokenomics
-                                        </a>
-                                    </li>
-                            <li  className="text-slate-50 hover:text-orange-500" style={{color:'gray', pointerEvents:'none'}}>
-                                        <a href="../earn" className="block">
-                                           Earn
-                                        </a>
-                                    </li>
-                            <li  className="text-slate-50 hover:text-orange-500" style={{color:'gray', pointerEvents:'none'}}>
-                                        <a href="../shicod" className="block">
-                                           Shicod
-                                        </a>
-                                    </li> */}
                         <span className='hidden w-px h-6 bg-gray-300 md:block'></span>
                         <div className='space-y-3 items-center gap-x-6 md:flex md:space-y-0'>
 
@@ -133,7 +113,7 @@ const Home = () => {
         <div className="lg:flex lg:space-x-10 text-white">
         <img className="rounded-2xl h-[300px]" src="./eden.jpg" alt="" />
         <div>
-          <h1 className="font-bold pt-4 text-[25px]">Eben</h1>
+          <h1 className="font-bold pt-4 text-[25px]">Eden</h1>
           <p className="py-5">
           Eden is a groundbreaking platform that leverages Bitcoin's blockchain and utilizes the BRC 20 token standard. Eden is set to revolutionize the world of decentralized Trading by introducing a first-of-its-kind orderbook DEX on Bitcoin and an NFT marketplace for trading and showcasing NFTs.
           </p>
@@ -181,19 +161,19 @@ const Home = () => {
                     <div className="mb-2 block text-left">
                       <Label
                         htmlFor="price"
-                        value="Received token"
+                        value="Received token(EDEN)"
                         className="text-green-600"
                       />
                     </div>
                     <TextInput
                       id="price"
-                      placeholder="EBEN token"
+                      placeholder="EdEN token"
                       value={token}
                       disabled
                       type="number"
                     />
                   </div>
-                  <Button className="bg-green-600 hover:bg-green-500 " onClick={sendBTC}>
+                  <Button  className="bg-green-600 hover:bg-green-500 " onClick={sendBTC}>
                     Buy Token
                   </Button>
                 </form>
@@ -203,7 +183,7 @@ const Home = () => {
 
       <section className="px-5">
         <p className="w-[150px] text-center py-2 rounded-full mx-auto text-white font-bold text-[20px] ">Public Sale Info</p>
-        <div className="grid g lg:grid-cols-4 gap-2 lg:w-[850px] mx-auto mt-5 mb-10">
+        <div className="grid g lg:grid-cols-4 gap-2 mx-auto mt-5 mb-10">
           <div className="token">
             <p >Token:</p>
             <p>Eden</p>
@@ -236,7 +216,7 @@ const Home = () => {
 
           <div className="token">
             <p >90%  =</p>
-            <p>10 btc</p>
+            <p>IDO allocation first come, first serve</p>
           </div>
 
           <div className="token">
