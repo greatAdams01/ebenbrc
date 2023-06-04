@@ -158,9 +158,8 @@ const Home = () => {
 
         <div className="bg-white p-6 lg:w-2/3 mx-5 lg:h-[500px] items-center  lg:mx-auto rounded-2xl border border-green-300">
           <CountDown targetDate={targetDate} />
-          <div className="lg:flex justify-center bg-white lg:space-x-10 items-center rounded-2xl">
-            <div className="">
-              <form className="flex flex-col gap-4">
+          <div className="bg-white items-center rounded-2xl">
+              <form className="flex flex-col gap-4 lg:w-[500px] lg:mx-auto">
                   <div>
                     <div className="mb-2 block text-left">
                       <Label
@@ -198,23 +197,61 @@ const Home = () => {
                     Buy Token
                   </Button>
                 </form>
-            </div>
+          </div>
+        </div>
+      </section>
 
-            <div>
-              <div>
-                <h1 className="font-bold pt-4 text-[25px]">Eben</h1>
-                <h2>Public Sale Info:</h2>
-              </div>
-              <p>Token: Eden</p>
-              <p>Total supply: 50,000,000</p>
-              <p>IDO price: $0.012</p>
-              <p>Softcap = 10 btc</p>
-              <p>Hardcap = 22 btc</p>
-              <p>90% = IDO allocation first come, first serve</p>
-              <p>5% = Ecosystem incentives</p>
-              <p>2% = Team</p>
-              <p>3% = strategic partnership</p>
-            </div>
+      <section className="px-5">
+        <p className="w-[150px] text-center py-2 rounded-full mx-auto text-white font-bold text-[20px] ">Public Sale Info</p>
+        <div className="grid g lg:grid-cols-4 gap-2 lg:w-[850px] mx-auto mt-5 mb-10">
+          <div className="token">
+            <p >Token:</p>
+            <p>Eden</p>
+          </div>
+
+          <div className="token">
+          <p >1 Eden =</p>
+            <p>0.00000045 BTC</p>
+          </div>
+
+          <div className="token">
+            <p >Total supply:</p>
+            <p>50,000,000</p>
+          </div>
+
+          <div className="token">
+            <p >IDO price:</p>
+            <p>$0.012</p>
+          </div>
+
+          <div className="token">
+            <p >Softcap =</p>
+            <p>10 btc</p>
+          </div>
+
+          <div className="token">
+            <p >Hardcap =</p>
+            <p>22 btc</p>
+          </div>
+
+          <div className="token">
+            <p >90%  =</p>
+            <p>10 btc</p>
+          </div>
+
+          <div className="token">
+            <p >5%  =</p>
+            <p>Ecosystem incentives</p>
+          </div>
+
+          <div className="token">
+            <p >2%  =</p>
+            <p>Team</p>
+          </div>
+
+          <div className="token">
+            <p >3%  =</p>
+            <p>strategic partnership</p>
           </div>
         </div>
       </section>
