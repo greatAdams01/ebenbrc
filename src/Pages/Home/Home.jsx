@@ -251,7 +251,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className=" w-[900px] mx-auto px-5">
+      <section className=" lg:w-[900px] mx-auto px-5">
         <p className="w-[150px] text-center py-2 rounded-full mx-auto text-white font-bold text-[20px] ">Public Sale Info</p>
         <div className="grid g lg:grid-cols-2 gap-2 mx-auto mt-5 mb-10">
 
